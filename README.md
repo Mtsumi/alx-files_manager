@@ -1,40 +1,34 @@
-## alx-files_manager
+# alx-files_manager
+[![Coverage Status](https://coveralls.io/repos/github/B3zaleel/alx-files_manager/badge.svg?branch=main)](https://coveralls.io/github/B3zaleel/alx-files_manager?branch=main)
+A simple file management API built with Express, MongoDB, Redis, Bull, and Node.js.
 
-This project is a summary of this back-end trimester: authentication, NodeJS, MongoDB, Redis, pagination and background processing.
+## Requirements
 
-The objective is to build a simple platform to upload and view files:
+### Applications
 
-* User authentication via a token
-* List all files
-* Upload a new file
-* Change permission of a file
-* View a file
-* Generate thumbnails for images
++ Node.js
++ Yarn (the package manager/resource negotiator)
 
-You will be guided step by step for building it, but you have some freedoms of implementation, split in more files etc… (utils folder will be your friend)
+### APIs
 
-Of course, this kind of service already exists in the real life - it’s a learning purpose to assemble each piece and build a full product.
++ A Google API should be created with at least an email sending scope and a valid URL (e.g.; `http://localhost:5000/`) should be one of the redirect URIs. The `credentials>
+### Environment Variables
 
-### Resources
+The required environment variables should be stored in a file named `.env` and each line should have the format `Name=Value`. The table below lists the environment variabl>
+| Name | Required | Description |
+|:-|:-|:-|
+| GOOGLE_MAIL_SENDER | Yes | The email address of the account responsible for sending emails to users. |
+| PORT | No (Default: `5000`)| The port the server should listen at. |
+| DB_HOST | No (Default: `localhost`)| The database host. |
+| DB_PORT | No (Default: `27017`)| The database port. |
+| DB_DATABASE | No (Default: `files_manager`)| The database name. |
+| FOLDER_PATH | No (Default: `/tmp/files_manager` (Linux, Mac OS X) & `%TEMP%/files_manager` (Windows)) | The local folder where files are saved. |
 
-* [Node JS getting started](https://nodejs.org/en/docs/guides/getting-started-guide/)
-* [Process API doc](https://node.readthedocs.io/en/latest/api/process/)
-* [Express Getting Started](https://expressjs.com/en/starter/installing.html)
-* [Mocha Documentation](https://mochajs.org/)
-* [Nodemon documentation](https://github.com/remy/nodemon#nodemon)
-* [MongoDB documentation](https://docs.mongodb.com/manual/)
-* [Redis documentation](https://redis.io/documentation) 
-* [Bull](https://github.com/OptimalBits/bull)
-* [Image thumbnail](https://www.npmjs.com/package/image-thumbnail)
-* [Mime-types](https://www.npmjs.com/package/mime-types)
+## Installation
 
-### Learning Objectives
-At the end of this project, you are expected to be able to explain to anyone, without the help of Google:
++ Clone this repository and switch to the cloned repository's directory.
++ Install the packages using `yarn install` or `npm install`.
 
-- how to create an API with Express
-- how to authenticate a user
-- how to store data in MongoDB
-- how to store temporary data in Redis
-- how to setup and use a background worker
+## Usage
 
-
+Start the Redis and MongoDB services on your system and run `yarn start-server` or `npm run start-server`.
