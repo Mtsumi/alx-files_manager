@@ -1,54 +1,51 @@
-import redis from 'redis';
+import { createClient } from 'redis';
 
 class RedisClient {
   constructor() {
-    this.client = redis.createClient();
-    this.isClientConnected = true;
-
-    this.client.on('error', (error) => {
-      console.error('Redis client error:', error);
-      this.isClientConnected = false;
-    });
-    this.client.on('connect', () =>{
-      this.isClientConnected = true;
+    this.client = createClient();
+    this.client.on('error', (err) => {
+      console.log(err);
     });
   }
 
   isAlive() {
-    return this.isClientConnected;
+    if (this.client.connected) {
+      return true;
+    }
+    return false;
   }
 
-  async get(key) {
+  set(key, value) {
     return new Promise((resolve, reject) => {
-      this.client.get(key, (error, value) => {
-        if (!error) {
-          resolve(value);
+      this.client.set(key, value, (err, reply) => {
+        if (err) {
+          reject(err);
         } else {
-          reject(error);
+          resolve(reply);
         }
       });
     });
   }
 
-  async set(key, value, duration) {
+  get(key) {
     return new Promise((resolve, reject) => {
-      this.client.setex(key, duration, value, (error, result) => {
-        if (error) {
-          reject(error);
+      this.client.get(key, (err, reply) => {
+        if (err) {
+          reject(err);
         } else {
-          resolve(result);
+          resolve(reply);
         }
       });
     });
   }
 
-  async del(key) {
+  del(key) {
     return new Promise((resolve, reject) => {
-      this.client.del(key, (error, result) => {
-        if (error) {
-          reject(error);
+      this.client.del(key, (err, reply) => {
+        if (err) {
+          reject(err);
         } else {
-          resolve(result);
+          resolve(reply);
         }
       });
     });
@@ -57,4 +54,4 @@ class RedisClient {
 
 const redisClient = new RedisClient();
 
-export default redisClient;
+module.exports = redisClient;
